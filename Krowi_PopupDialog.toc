@@ -12,9 +12,9 @@
 #    SOFTWARE.
 #
 
-## Interface: 110207, 50502, 11508
+## Interface: 110207, 50503, 11508
 ## Title: Krowi's |cFF1D92C2Popup Dialog|r
-## Version: 1.0.2
+## Version: 1.0.3
 ## Author: Krowi
 ## Notes: A library providing a reusable popup dialog for displaying copyable external links
 ## X-Discord-Invite-Link: https://discord.gg/mdBFQJYeQZ
