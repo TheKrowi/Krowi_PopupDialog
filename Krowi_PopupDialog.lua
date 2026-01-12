@@ -12,38 +12,53 @@ if not lib then	return end
 local externalLink
 local externalLinkDialog = 'KROWI_EXTERNAL_LINK'
 StaticPopupDialogs[externalLinkDialog] = { -- Needs to be added to the Blizzard list
-	text = lib.L['Copy and close'],
-	button1 = lib.L['Close'],
+	text = '',
+	button1 = '',
 	hasEditBox = true,
 	editBoxWidth = 500,
 	timeout = 0,
 	whileDead = true,
 	hideOnEscape = true,
-	preferredIndex = 3,
-	OnShow = function(self)
-		local editBox = self.editBox or self.EditBox
+	OnShow = function(dialog)
+		local editBox = dialog.editBox or dialog.EditBox
 		editBox:SetMaxLetters(0)
-		editBox:SetText(externalLink)
+		editBox:SetText(string.len(externalLink))
 		editBox:HighlightText()
 	end,
-	EditBoxOnEscapePressed = function(self)
-		local button = self:GetParent().button1 or self:GetParent().ButtonContainer.Button1
-		button:Click()
-	end,
-	EditBoxOnTextChanged = function(self)
-		local button = self:GetParent().button1 or self:GetParent().ButtonContainer.Button1
-		if self:GetText():len() < 1 then
-			button:Click()
+	EditBoxOnTextChanged = function(editBox)
+		local parent = editBox:GetParent()
+		local button = parent.button1 or parent.ButtonContainer and parent.ButtonContainer.Button1
+		if editBox:GetText():len() < 1 then
+			if button then
+				button:Click()
+			end
 		else
-			self:SetMaxLetters(0)
-			self:SetText(externalLink)
-			self:HighlightText()
+			editBox:SetMaxLetters(0)
+			editBox:SetText(externalLink)
+			editBox:HighlightText()
+		end
+	end,
+	EditBoxOnEscapePressed = function(editBox)
+		local dialog = editBox:GetParent()
+		local button = dialog.button1 or dialog.ButtonContainer and dialog.ButtonContainer.Button1
+		if button then
+			button:Click()
 		end
 	end,
 }
 
-function lib.ShowExternalLink(link)
-	externalLink = link or ''
+function lib.ShowExternalLink(options, text, closeText)
+	if type(options) ~= 'table' then
+		options = {
+			Link = options,
+			Text = text,
+			CloseText = closeText
+		}
+	end
+	local dialog = StaticPopupDialogs[externalLinkDialog]
+	dialog.text = options.Text or lib.L['Copy and close']
+	dialog.button1 = options.CloseText or lib.L['Close']
+	externalLink = options.Link or ''
 	StaticPopup_Show(externalLinkDialog)
 end
 
@@ -60,45 +75,57 @@ StaticPopupDialogs[numericInputDialog] = {
 	timeout = 0,
 	whileDead = true,
 	hideOnEscape = true,
-	OnShow = function(self)
-		local editBox = self.editBox or self.EditBox
+	OnShow = function(dialog)
+		local editBox = dialog.editBox or dialog.EditBox
 		editBox:SetNumeric(true)
 		editBox:SetMaxLetters(string.len(tostring(numericInputMax)))
 		editBox:SetText(tostring(numericInputDefault))
 		editBox:HighlightText()
 	end,
-	OnAccept = function(self)
-		local editBox = self.editBox or self.EditBox
+	OnAccept = function(dialog)
+		local editBox = dialog.editBox or dialog.EditBox
 		local value = tonumber(editBox:GetText())
 		if value and value >= numericInputMin and value <= numericInputMax and numericInputCallback then
 			numericInputCallback(value)
 		end
 	end,
-	EditBoxOnEnterPressed = function(self)
-		local parent = self:GetParent()
-		local button = parent.button1 or parent.ButtonContainer and parent.ButtonContainer.Button1
+	EditBoxOnEnterPressed = function(editBox)
+		editBox:SetNumeric(false)
+		local dialog = editBox:GetParent()
+		local button = dialog.button1 or dialog.ButtonContainer and dialog.ButtonContainer.Button1
 		if button then
 			button:Click()
 		end
 	end,
-	EditBoxOnEscapePressed = function(self)
-		local parent = self:GetParent()
-		local button = parent.button2 or parent.ButtonContainer and parent.ButtonContainer.Button2
+	EditBoxOnEscapePressed = function(editBox)
+		editBox:SetNumeric(false)
+		local dialog = editBox:GetParent()
+		local button = dialog.button2 or dialog.ButtonContainer and dialog.ButtonContainer.Button2
 		if button then
 			button:Click()
 		end
 	end,
-	preferredIndex = 3,
 }
 
-function lib.ShowNumericInput(options)
+function lib.ShowNumericInput(options, min, max, default, callback, acceptText, cancelText)
+	if type(options) ~= 'table' then
+		options = {
+			Text = options,
+			AcceptText = acceptText,
+			CancelText = cancelText,
+			Min = min,
+			Max = max,
+			Default = default,
+			Callback = callback
+		}
+	end
 	local dialog = StaticPopupDialogs[numericInputDialog]
-	dialog.text = options.text or lib.L['Enter a number']
-	dialog.button1 = options.acceptText or lib.L['Accept']
-	dialog.button2 = options.cancelText or lib.L['Cancel']
-	numericInputMin = options.min or 1
-	numericInputMax = options.max or 999
-	numericInputDefault = options.default or numericInputMin
-	numericInputCallback = options.callback
+	dialog.text = options.Text or lib.L['Enter a number']
+	dialog.button1 = options.AcceptText or lib.L['Accept']
+	dialog.button2 = options.CancelText or lib.L['Cancel']
+	numericInputMin = options.Min or 1
+	numericInputMax = options.Max or 999
+	numericInputDefault = options.Default or numericInputMin
+	numericInputCallback = options.Callback
 	StaticPopup_Show(numericInputDialog)
 end
