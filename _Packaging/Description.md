@@ -1,20 +1,38 @@
-A reusable popup dialog library for World of Warcraft addon development that provides an easy way to display copyable external links to players.
+A reusable popup dialog library for World of Warcraft addon development that provides an easy way to display copyable external links and numeric input dialogs to players. Now with full localization support for 11 languages!
 
 ## Features
 
-### Popup Dialog Library (`Krowi_PopupDialog-1.0`)
+### Popup Dialog Library (`Krowi_PopupDialog_2`)
 - **Copyable Link Display**: Present URLs and other text in a popup dialog with an auto-selected, easy-to-copy text field
-- **Simple Integration**: Single function call to display links
-- **User-Friendly**: Automatically selects text for instant copying
+- **Numeric Input Dialog**: Collect numeric input from users with customizable min/max ranges and validation
+- **Full Localization Support**: Native translations for 11 languages (English, German, Spanish, French, Italian, Korean, Portuguese, Russian, Simplified Chinese, Traditional Chinese)
+- **Simple Integration**: Single function calls for all dialog types
+- **User-Friendly**: Automatically selects text for instant copying and validates numeric input
 - **Lightweight**: Focused functionality without bloat
-- **LibStub Support**: Standard LibStub library structure for dependency management
+- **KROWI_LIBMAN Support**: Modern library structure for dependency management
 
 ## Usage Examples
 
 ### Basic Link Display
 ```lua
-local PopupDialog = LibStub("Krowi_PopupDialog-1.0")
+local PopupDialog = KROWI_LIBMAN:GetLibrary('Krowi_PopupDialog_2')
 PopupDialog.ShowExternalLink("https://example.com")
+```
+
+### Numeric Input Dialog
+```lua
+local PopupDialog = KROWI_LIBMAN:GetLibrary('Krowi_PopupDialog_2')
+PopupDialog.ShowNumericInput({
+    text = "Enter a number:",
+    acceptText = "Accept",
+    cancelText = "Cancel",
+    min = 1,
+    max = 100,
+    default = 50,
+    callback = function(value)
+        print("User entered: " .. value)
+    end
+})
 ```
 
 ### Common Use Cases
@@ -33,30 +51,56 @@ PopupDialog.ShowExternalLink("https://www.wowinterface.com/downloads/info12345")
 
 -- Documentation or support page
 PopupDialog.ShowExternalLink("https://github.com/username/addon/wiki")
+
+-- Numeric input for settings
+PopupDialog.ShowNumericInput({
+    text = "Set update interval (seconds):",
+    min = 5,
+    max = 300,
+    default = 60,
+    callback = function(value)
+        MyAddon.UpdateInterval = value
+    end
+})
 ```
 
 ## API Reference
 
-### Krowi_PopupDialog-1.0
+### Krowi_PopupDialog_2
 
-#### Main Function
+#### Main Functions
 
 | Function | Parameters | Description |
 |----------|------------|-------------|
 | `ShowExternalLink(url)` | `url` (string) | Displays a popup dialog with the given URL in a copyable text field |
+| `ShowNumericInput(options)` | `options` (table) | Displays a numeric input dialog with customizable validation |
 
-**Parameters:**
+**ShowExternalLink Parameters:**
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `url` | string | Yes | The URL or text to display in the copyable popup dialog |
 
+**ShowNumericInput Options:**
+
+| Option | Type | Required | Default | Description |
+|--------|------|----------|---------|-------------|
+| `text` | string | No | "Enter a number:" | The prompt text displayed in the dialog |
+| `acceptText` | string | No | "Accept" | Text for the accept button |
+| `cancelText` | string | No | "Cancel" | Text for the cancel button |
+| `min` | number | No | 1 | Minimum allowed value |
+| `max` | number | No | 999 | Maximum allowed value |
+| `default` | number | No | `min` value | Default value displayed in the input field |
+| `callback` | function | Yes | nil | Function called with the entered value when accepted |
+
 **Behavior:**
 - Opens a popup dialog window
-- Displays the provided URL in an editable text field
-- Automatically selects all text for easy copying (Ctrl+C / Cmd+C)
+- For link display: Displays the provided URL in an editable text field with automatic text selection
+- For numeric input: Validates input to ensure it's within min/max range before calling callback
+- Automatically selects all text for easy copying (Ctrl+C / Cmd+C) or editing
 - Modal dialog prevents other UI interactions until closed
-- Close button or ESC key dismisses the dialog
+- Close button, Cancel button, or ESC key dismisses the dialog
+- All text is automatically localized based on the player's game language
 
 ## Use Cases
 - Sharing Discord server invites
@@ -64,7 +108,9 @@ PopupDialog.ShowExternalLink("https://github.com/username/addon/wiki")
 - Providing GitHub repository or documentation links
 - Displaying support or bug report URLs
 - Sharing patch notes or changelog locations
-- Any scenario requiring players to copy external links
+- Collecting numeric configuration values from users
+- Input dialogs for item counts, timeouts, or other numeric settings
+- Any scenario requiring players to copy external links or enter numbers
 
 ## Requirements
-- LibStub
+- KROWI_LIBMAN

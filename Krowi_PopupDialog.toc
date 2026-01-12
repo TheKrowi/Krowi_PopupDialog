@@ -1,27 +1,15 @@
 #
 #    Copyright (c) 2023 Krowi
-#
-#    All Rights Reserved unless otherwise explicitly stated.
-#
-#    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-#    SOFTWARE.
+#    Licensed under the terms of the LICENSE file in this repository.
 #
 
-## Interface: 110207, 50503, 11508
+## Interface: 120000, 110207, 50503, 20505, 20504, 20503, 20502, 20501, 11508
 ## Title: Krowi's |cFF1D92C2Popup Dialog|r
-## Version: 1.0.3
+## Version: 2.0
 ## Author: Krowi
 ## Notes: A library providing a reusable popup dialog for displaying copyable external links
-## X-Discord-Invite-Link: https://discord.gg/mdBFQJYeQZ
-## X-Discord-Server-Name: Krowi's Addons
-## X-CurseForge: https://www.curseforge.com/wow/addons/krowi-popup-dialog
-## X-Curse-Project-ID: 1399934
-## X-Wago: https://addons.wago.io/addons/krowi-popup-dialog
+## X-Slug: krowi-popup-dialog
+## X-CurseForge-ID: 1399934
 ## X-Wago-ID: b6XV7xGp
 
-Krowi_PopupDialog-1.0.xml
+Krowi_PopupDialog.xml
