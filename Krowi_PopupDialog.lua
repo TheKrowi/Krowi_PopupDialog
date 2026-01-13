@@ -5,7 +5,10 @@
 
 ---@diagnostic disable: undefined-global
 
-local lib = KROWI_LIBMAN:NewLibrary('Krowi_PopupDialog_2', 0, true, false, true)
+local lib = KROWI_LIBMAN:NewLibrary('Krowi_PopupDialog_2', 0, {
+    SetCurrent = true,
+    InitLocalization = true,
+})
 if not lib then	return end
 
 -- [[ External Link Popup Dialog ]] --
@@ -21,8 +24,8 @@ StaticPopupDialogs[externalLinkDialog] = { -- Needs to be added to the Blizzard 
 	hideOnEscape = true,
 	OnShow = function(dialog)
 		local editBox = dialog.editBox or dialog.EditBox
-		editBox:SetMaxLetters(0)
-		editBox:SetText(string.len(externalLink))
+		editBox:SetMaxLetters(string.len(externalLink))
+		editBox:SetText(externalLink)
 		editBox:HighlightText()
 	end,
 	EditBoxOnTextChanged = function(editBox)
@@ -33,7 +36,7 @@ StaticPopupDialogs[externalLinkDialog] = { -- Needs to be added to the Blizzard 
 				button:Click()
 			end
 		else
-			editBox:SetMaxLetters(0)
+			editBox:SetMaxLetters(string.len(externalLink))
 			editBox:SetText(externalLink)
 			editBox:HighlightText()
 		end
