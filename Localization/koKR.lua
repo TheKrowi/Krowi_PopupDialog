@@ -13,9 +13,9 @@ if not L then return end
 
 -- [[ Everything after this line is automatically generated from CurseForge and is not meant for manual edit - SOURCETOKEN - AUTOGENTOKEN ]] --
 
--- [[ Exported at 2026-01-12 11-00-00 ]] --
-L["Enter a number"] = '숫자를 입력하세요:'
-L["Accept"] = '수락'
-L["Cancel"] = '취소'
-L["Close"] = '닫기'
-L["Copy and close"] = '웹사이트를 복사하고 이 창을 닫으려면 Ctrl + X를 누르세요.'
+-- [[ Exported at 2026-01-14 15-50-42 ]] --
+L["Accept"] = "수락"
+L["Cancel"] = "취소"
+L["Close"] = "닫기"
+L["Copy and close"] = "웹사이트를 복사하고 이 창을 닫으려면 Ctrl + X를 누르세요."
+L["Enter a number"] = "숫자를 입력하세요:"

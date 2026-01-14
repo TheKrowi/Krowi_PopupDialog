@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## 2.0 - 2026-01-12
+## 2.0 - 2026-01-14
 ### Added
 - Created complete localization system with 11 language files (enUS, deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW)
 

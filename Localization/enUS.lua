@@ -13,9 +13,9 @@ if not L then return end
 
 -- [[ Everything after this line is automatically generated from CurseForge and is not meant for manual edit - SOURCETOKEN - AUTOGENTOKEN ]] --
 
--- [[ Exported at 2026-01-02 11-03-56 ]] --
-L["Enter a number"] = 'Enter a number:'
+-- [[ Exported at 2026-01-14 15-50-39 ]] --
 L["Accept"] = true
 L["Cancel"] = true
 L["Close"] = true
-L["Copy and close"] = 'Press Ctrl + X to copy the website and close this window.'
+L["Copy and close"] = "Press Ctrl + X to copy the website and close this window."
+L["Enter a number"] = "Enter a number:"
