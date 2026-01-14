@@ -3,7 +3,7 @@
 #    Licensed under the terms of the LICENSE file in this repository.
 #
 
-## Interface: 120000, 110207, 50503, 20505, 20504, 20503, 20502, 20501, 11508
+## Interface: 120000, 110207, 50503, 20505, 11508
 ## Title: Krowi's |cFF1D92C2Popup Dialog|r
 ## Version: 2.0
 ## Author: Krowi
